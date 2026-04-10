@@ -1,31 +1,50 @@
+import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Scanner;
 
-// Change 'ArrayListOperations' to 'Main' if the autograder requires src/Main.java
-public class ArrayListOperations { 
+public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
-        if (!sc.hasNextInt()) return;
-        int n = sc.nextInt();
-        
-        ArrayList<String> cart = new ArrayList<>();
-        for (int i = 0; i < n; i++) {
-            cart.add(sc.next());
+        // Check if there is input to avoid errors
+        if (!sc.hasNext()) {
+            sc.close();
+            return;
         }
 
-        String searchItem = sc.next();
-        Collections.sort(cart);
+        String s = sc.next();
+        
+        // Handle empty or very short strings immediately
+        if (s.length() <= 1) {
+            System.out.println(s);
+            sc.close();
+            return;
+        }
 
-        System.out.println("Sorted Items: " + cart);
+        StringBuilder compressed = new StringBuilder();
+        int count = 1;
 
-        if (cart.contains(searchItem)) {
-            System.out.println("Found");
+        // Iterate through the string to count consecutive characters
+        for (int i = 0; i < s.length(); i++) {
+            if (i + 1 < s.length() && s.charAt(i) == s.charAt(i + 1)) {
+                count++;
+            } else {
+                compressed.append(s.charAt(i));
+                compressed.append(count);
+                count = 1; // Reset for next char
+            }
+        }
+
+        String result = compressed.toString();
+
+        // THE FIX: Use <= to ensure equal length strings (like aabb -> a2b2) 
+        // return the compressed version.
+        if (result.length() <= s.length()) {
+            System.out.println(result);
         } else {
-            System.out.println("Not Found");
+            System.out.println(s);
         }
 
         sc.close();
-    } // This closes the main method
-} // This closes the class
+    }
+}
