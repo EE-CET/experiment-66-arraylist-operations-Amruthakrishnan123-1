@@ -2,34 +2,30 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
 
-public class Main {
+// Change 'ArrayListOperations' to 'Main' if the autograder requires src/Main.java
+public class ArrayListOperations { 
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-           int n = Integer.parseInt(scanner.nextLine());
-        String[] items = scanner.nextLine().split(" ");
+        Scanner sc = new Scanner(System.in);
 
-        ArrayList<String> list = new ArrayList<>();
-
+        if (!sc.hasNextInt()) return;
+        int n = sc.nextInt();
+        
+        ArrayList<String> cart = new ArrayList<>();
         for (int i = 0; i < n; i++) {
-            list.add(items[i]);
+            cart.add(sc.next());
         }
 
-        // Sort list
-        Collections.sort(list);
+        String searchItem = sc.next();
+        Collections.sort(cart);
 
-        // Search item
-        String searchItem = scanner.nextLine();
+        System.out.println("Sorted Items: " + cart);
 
-        // Output
-        System.out.println("Sorted Items: " + list);
-
-        if (list.contains(searchItem)) {
-            System.out.print("Found");
+        if (cart.contains(searchItem)) {
+            System.out.println("Found");
         } else {
-            System.out.print("Not Found");
+            System.out.println("Not Found");
         }
-    }
-}
-    
 
-
+        sc.close();
+    } // This closes the main method
+} // This closes the class
