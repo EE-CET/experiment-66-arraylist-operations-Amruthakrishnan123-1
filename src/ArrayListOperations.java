@@ -1,48 +1,47 @@
-import java.util.Scanner;
-import java.util.ArrayList;
-import java.util.Collections;
+import java.util.*;
 
-public class Main {
+public class ArrayListOperations {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
-        // Check if there is input to avoid errors
-        if (!sc.hasNext()) {
-            sc.close();
-            return;
+        // Read number of items
+        int N = sc.nextInt();
+        sc.nextLine(); // consume newline
+
+        // Read items
+        String[] inputItems = sc.nextLine().split(" ");
+
+        ArrayList<String> items = new ArrayList<>();
+
+        // Add items to list
+        for (int i = 0; i < N; i++) {
+            items.add(inputItems[i]);
         }
 
-        String s = sc.next();
-        
-        // Handle empty or very short strings immediately
-        if (s.length() <= 1) {
-            System.out.println(s);
-            sc.close();
-            return;
-        }
+        // Sort alphabetically
+        Collections.sort(items);
 
-        StringBuilder compressed = new StringBuilder();
-        int count = 1;
+        // Read search item
+        String searchItem = sc.nextLine();
 
-        // Iterate through the string to count consecutive characters
-        for (int i = 0; i < s.length(); i++) {
-            if (i + 1 < s.length() && s.charAt(i) == s.charAt(i + 1)) {
-                count++;
-            } else {
-                compressed.append(s.charAt(i));
-                compressed.append(count);
-                count = 1; // Reset for next char
+        // Check if item exists
+        boolean found = items.contains(searchItem);
+
+        // Print sorted list
+        System.out.print("Sorted Items: [");
+        for (int i = 0; i < items.size(); i++) {
+            System.out.print(items.get(i));
+            if (i != items.size() - 1) {
+                System.out.print(", ");
             }
         }
+        System.out.println("]");
 
-        String result = compressed.toString();
-
-        // THE FIX: Use <= to ensure equal length strings (like aabb -> a2b2) 
-        // return the compressed version.
-        if (result.length() <= s.length()) {
-            System.out.println(result);
+        // Print result
+        if (found) {
+            System.out.println("Found");
         } else {
-            System.out.println(s);
+            System.out.println("Not Found");
         }
 
         sc.close();
