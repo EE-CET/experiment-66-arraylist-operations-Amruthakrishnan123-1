@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class ArrayListOperations {
+public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
@@ -9,16 +9,16 @@ public class ArrayListOperations {
         sc.nextLine(); // consume newline
 
         // Read items
-        String[] inputItems = sc.nextLine().split(" ");
+        String[] itemsInput = sc.nextLine().split(" ");
 
         ArrayList<String> items = new ArrayList<>();
 
         // Add items to list
         for (int i = 0; i < N; i++) {
-            items.add(inputItems[i]);
+            items.add(itemsInput[i]);
         }
 
-        // Sort alphabetically
+        // Sort items alphabetically
         Collections.sort(items);
 
         // Read search item
@@ -37,7 +37,7 @@ public class ArrayListOperations {
         }
         System.out.println("]");
 
-        // Print result
+        // Print search result
         if (found) {
             System.out.println("Found");
         } else {
